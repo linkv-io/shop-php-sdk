@@ -47,8 +47,8 @@ class HttpClient implements SocketInterface
 
 function test_bind()
 {
-    $app_id = 'LM6000154116334399555433';
-    $app_secret = '32023f26cf8e5da272143022b0b294d3';
+    $app_id = '';
+    $app_secret = '';
     $http_client = new HttpClient();
     $a = new Shop($app_id, $app_secret, $http_client);
 
@@ -63,8 +63,8 @@ function test_bind()
 
 function test_video_info()
 {
-    $app_id = 'LM6000154116334399555433';
-    $app_secret = '32023f26cf8e5da272143022b0b294d3';
+    $app_id = '';
+    $app_secret = '';
     $http_client = new HttpClient();
     $a = new Shop($app_id, $app_secret, $http_client);
 
@@ -78,8 +78,8 @@ function test_video_info()
 
 function test_notify_product()
 {
-    $app_id = 'LM6000154116334399555433';
-    $app_secret = '32023f26cf8e5da272143022b0b294d3';
+    $app_id = '';
+    $app_secret = '';
     $n = new Notify($app_id, $app_secret);
 
     var_dump($n->VerifyVideoOpenResponse([
