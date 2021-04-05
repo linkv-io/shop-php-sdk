@@ -25,9 +25,9 @@ class GetVideoInfoResponse
      */
     protected $user_id;
     /**
-     * @var string The video_type.
+     * @var string The online.
      */
-    protected $video_type;
+    protected $online;
     /**
      * @var string The room_state.
      */
@@ -70,7 +70,7 @@ class GetVideoInfoResponse
         $this->title = isset($data['title']) ? $data['title'] : '';
         $this->video_id = isset($data['video_id']) ? $data['video_id'] : '';
         $this->user_id = isset($data['user_id']) ? $data['user_id'] : '';
-        $this->video_type = isset($data['online']) ? $data['online'] : '';
+        $this->online = isset($data['online']) ? $data['online'] : '';
         $this->room_state = isset($data['room_state']) ? $data['room_state'] : '0';
         $this->capture = isset($data['capture']) ? $data['capture'] : '';
         $this->watch_num = isset($data['watch_num']) ? $data['watch_num'] : '0';
@@ -79,7 +79,7 @@ class GetVideoInfoResponse
         $this->comment_num = isset($data['comment_num']) ? $data['comment_num'] : '0';
         $this->hot_num = isset($data['hot_num']) ? $data['hot_num'] : '0';
 
-        if ($this->video_id == '' || $this->user_id == '' || $this->video_type == '' || $this->room_state == '') {
+        if ($this->video_id == '' || $this->user_id == '' || $this->online == '' || $this->room_state == '') {
             throw new ResponseException("video_id,user_id,video_type,room_state error data:{" . json_encode($data) . "}");
         }
     }
@@ -116,13 +116,13 @@ class GetVideoInfoResponse
 
 
     /**
-     * return video_type
+     * return online
      *
      * @return string
      */
-    public function getVideoType()
+    public function getOnLine()
     {
-        return $this->video_type;
+        return $this->online;
     }
 
     /**
