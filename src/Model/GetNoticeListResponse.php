@@ -29,7 +29,7 @@ class GetNoticeListResponse
      */
     public function __construct($data)
     {
-        $this->list = isset($data['list']) ? $data['list'] : '';
+        $this->list = isset($data['list']) ? $data['list'] : [];
 
         // if ($this->list == []) {
         //     throw new ResponseException("暂无直播预告");
