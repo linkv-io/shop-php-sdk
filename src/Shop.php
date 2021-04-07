@@ -1,5 +1,4 @@
 <?php
-
 namespace LinkV\Shop;
 
 use LinkV\Shop\Util\Util;
@@ -8,6 +7,8 @@ use LinkV\Shop\Exception\ResponseException;
 use LinkV\Shop\Model\BindResponse;
 use LinkV\Shop\Model\GetVideoInfoResponse;
 use LinkV\Shop\Model\GetFeedListResponse;
+use LinkV\Shop\Model\GetNoticeListResponse;
+
 
 
 /**
@@ -222,5 +223,48 @@ class Shop
             throw new ResponseException("api result status not 200 message:{$msg}");
         }
         return new GetFeedListResponse($data);
+    }
+    /**
+     * GetLiveNotice
+     *
+     *
+     * @return GetLiveNotice
+     *
+     * @throws ResponseException
+     *
+     */
+    public function GetLiveNotice()
+    {
+        $nonce = Util::genNonce();
+
+        $params = array();
+        $params['app_id'] = $this->app_id;
+        $params['nonce'] = $nonce;
+        $params['sign'] = Util::genSign($params, $this->app_secret);
+
+        $header = array();
+        $header['Content-Type'] = 'application/x-www-form-urlencoded';
+        $header['User-Agent'] = 'PHP Composer SDK v0.0.1';
+
+        $uri = $this->uri . '/live/notice';
+        $resp = $this->http->post($uri, $header, $params);
+        $status_code = isset($resp['status_code']) ? $resp['status_code'] : -1;
+        $body = isset($resp['body']) ? $resp['body'] : '';
+
+        if ($status_code != 200) {
+            throw new ResponseException('http status code not 200');
+        }
+        $jsonData = json_decode($body, true);
+        if ($jsonData == null) {
+            throw new ResponseException("response decode error body:{$body}");
+        }
+        $status = isset($jsonData['status']) ? $jsonData['status'] : -1;
+        $msg = isset($jsonData['msg']) ? $jsonData['msg'] : '';
+        $data = isset($jsonData['data']) ? $jsonData['data'] : [];
+
+        if ($status != 200) {
+            throw new ResponseException("api result status not 200 message:{$msg}");
+        }
+        return new GetNoticeListResponse($data);
     }
 }
