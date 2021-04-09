@@ -246,7 +246,7 @@ class Shop
         $header['Content-Type'] = 'application/x-www-form-urlencoded';
         $header['User-Agent'] = 'PHP Composer SDK v0.0.1';
 
-        $uri = $this->uri . '/live/notice';
+        $uri = $this->uri . '/open/v0/getNotice';
         $resp = $this->http->post($uri, $header, $params);
         $status_code = isset($resp['status_code']) ? $resp['status_code'] : -1;
         $body = isset($resp['body']) ? $resp['body'] : '';
